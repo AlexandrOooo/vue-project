@@ -41,9 +41,9 @@ export default {
 
 <template>
     <div class="list-item">
-        <!-- <router-link @click="setPhotoParams(post)" :to="'/photo/' + post.id"> -->
-        <img :src="post.urls.thumb" class="list-item__top" alt="" />
-        <!-- </router-link> -->
+        <router-link @click="setPhotoParams(post)" :to="'/photo/' + post.id">
+            <img :src="post.urls.thumb" class="list-item__top" alt="" />
+        </router-link>
         <div class="list-item__bottom">
             <p>{{ post.user.first_name }}</p>
             <p>{{ post.user.last_name }}</p>
