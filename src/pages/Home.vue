@@ -17,6 +17,7 @@ export default {
     methods: {
         ...mapActions({
             fetchPosts: "post/fetchPosts",
+            loadMorePosts: "post/loadMorePosts",
         }),
         ...mapMutations({
             setQuerySearch: "post/setQuerySearch",
@@ -36,6 +37,18 @@ export default {
             this.fetchPosts();
         }
         this.isMounted = true;
+
+        const options = {
+            rootMargin: "0px",
+            threshold: 1.0,
+        };
+        const callback = (entries, observer) => {
+            if (entries[0].isIntersecting) {
+                this.loadMorePosts();
+            }
+        };
+        const observer = new IntersectionObserver(callback, options);
+        observer.observe(this.$refs.observer);
     },
     watch: {
         querySearch() {
@@ -56,6 +69,7 @@ export default {
     >
     </my-input>
     <list-posts :posts="searchPosts"></list-posts>
+    <div ref="observer" class="observer"></div>
 </template>
 
 <style>
@@ -63,5 +77,8 @@ export default {
     position: fixed;
     left: 50px;
     top: 100px;
+}
+.observer {
+    height: 1px;
 }
 </style>

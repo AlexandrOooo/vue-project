@@ -45,7 +45,7 @@ export const postsModule = {
                         },
                     }
                 );
-                console.log(data);
+
                 commit("setPosts", data);
                 commit("setSearchPosts");
             } catch (e) {
@@ -64,7 +64,7 @@ export const postsModule = {
                         },
                     }
                 );
-                console.log(data);
+
                 commit("setPosts", [...state.posts, ...data]);
             } catch (e) {
                 console.log(e);
